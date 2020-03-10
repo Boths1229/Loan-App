@@ -2,48 +2,50 @@ import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 import 'bootstrap';
 import { Redirect } from 'react-router-dom';
+import { Data } from '../pages/data'
 import '../index.css';
 
 class Signin extends Component {
   constructor(props) {
       super(props)
       this.state = {
-        email:     'boths@yahoo.com',
-        password:  'makky',
-        correct:false,
+        email:     '',
+        password:  '',
+        Data:      Data,
+        registered:   false,
+        notRegisterd: false
       }
       this.handleSubmit = this.handleSubmit.bind(this);
   }
-  checkRegister() {    
-    // const newEmail = this.state.email;
-    // const newPassword = this.state.password;
-    // this.setState({
-    //     email: newEmail,
-    //     password: newPassword
-    //   })
-    if (this.state.email === 'boths@yahoo.com' && this.state.password === 'makky') {
-        console.log('its correct')
-      this.setState({correct:true})
+  checkRegister() {
+    const isRegistered = Data.filter((data) => {
+      return (data.email === this.state.email && data.password === this.state.password
+       );
+    })
+    if (isRegistered[0]) {
+      this.setState({
+        registered: true
+      })
     } else {
-      console.log('naaah')
+        this.setState({
+            notRegisterd: true
+        })
     }
   }
-  handleSubmit(e) {
-    // const newEmail = e.target.value;
-    // const newPassword = e.target.value;
-    // this.setState({
-    //     email: e.target.value,
-    //     password: e.target.value
-    //   })
+  handleSubmit() {
     return this.checkRegister();
   }
 
 
   render () { 
-  if (this.state.correct) {
+  if (this.state.registered) {
     return <Redirect to={'/requestLoan'} />
-  }
+  } 
 
+  if (this.state.notRegisterd) {
+      alert('please fill in your correct email and password')
+      return 
+  }
   return (
     <MDBContainer>
       <MDBRow>
@@ -57,7 +59,9 @@ class Signin extends Component {
               </MDBRow>
             </div>
             <MDBCardBody className="mx-4 mt-4">
-              <MDBInput label="Your email" group type="text" validate value={this.state.email} onChange={(e)=> {
+              <MDBInput label="Your email" group type="text" validate 
+              value={this.state.email} 
+              onChange={(e)=> {
                   this.setState({email: e.target.value})
               }} />
               <MDBInput
