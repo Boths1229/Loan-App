@@ -13,7 +13,8 @@ class Signin extends Component {
         password:  '',
         Data:      Data,
         registered:   false,
-        notRegisterd: false
+        notRegisterd: false,
+        isAdmin:      false
       }
       this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,22 +23,36 @@ class Signin extends Component {
       return (data.email === this.state.email && data.password === this.state.password
        );
     })
-    if (isRegistered[0]) {
+    const admin = Data.filter((data) => {
+      return ( data.email === this.state.email && data.password === this.state.password && data.isAdmin );
+    })
+
+    if (admin[0]) {
+      this.setState({
+        isAdmin: true
+      })
+    } else if(isRegistered[0]) {
       this.setState({
         registered: true
       })
-    } else {
+    
+    } else  {
         this.setState({
             notRegisterd: true
         })
     }
   }
+
   handleSubmit() {
     return this.checkRegister();
   }
 
 
   render () { 
+  if (this.state.isAdmin) {
+    return <Redirect to={'/verifyLoan'} />
+  }
+
   if (this.state.registered) {
     return <Redirect to={'/requestLoan'} />
   } 

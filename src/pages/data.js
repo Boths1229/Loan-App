@@ -2,11 +2,13 @@ export const Data = [
     {
         fullName: 'chuks Emma',
         email: 'boths@yahoo.com',
-        password: 'makky'
+        password: 'makky',
+        isAdmin:  true
     },
     {
         fullName: 'kene chuks',
         email: 'kene@yahoo.com',
-        password: 'kene'
+        password: 'kene',
+        isAdmin: false
     }
 ]
