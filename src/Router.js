@@ -5,6 +5,7 @@ import Signup from './pages/signup';
 import LoanRepayment from './pages/loanRepayment';
 import RequestLoan from './pages/requestLoan';
 import Navigation from './Navigation';
+import VerifyLoan from './pages/verifyLoan';
 
 const Router = () => (
     <BrowserRouter basename={process.env.PUBLIC_URL} >
@@ -13,7 +14,8 @@ const Router = () => (
          <Route exact path='/signin' component={Signin} />
          <Route exact path='/signup' component={Signup} />
          <Route exact path='/loanRepayment' component={LoanRepayment} />
-         <Route path='/requestLoan' component={RequestLoan} />
+         <Route exact path='/requestLoan' component={RequestLoan} />
+         <Route exact path='/verifyLoan' component={VerifyLoan} />
     </Switch>
     </BrowserRouter>
 );

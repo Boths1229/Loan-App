@@ -50,11 +50,28 @@ class Signin extends Component {
 
   render () { 
   if (this.state.isAdmin) {
-    return <Redirect to={'/verifyLoan'} />
+    const admin = Data.filter((data) => {
+      return ( data.email === this.state.email && data.password === this.state.password && data.isAdmin );
+    })
+    return <Redirect to={{pathname: '/verifyLoan',
+                          state: {
+                            name: admin[0].fullName,
+                            email: admin[0].email
+                          }
+  }} />
   }
 
   if (this.state.registered) {
-    return <Redirect to={'/requestLoan'} />
+    const isRegistered = Data.filter((data) => {
+      return (data.email === this.state.email && data.password === this.state.password
+       );
+    })
+    return <Redirect to={{pathname: '/requestLoan',
+                          state: {
+                            name: isRegistered[0].fullName,
+                            email: isRegistered[0].email
+                          }
+  }} />
   } 
 
   if (this.state.notRegisterd) {
