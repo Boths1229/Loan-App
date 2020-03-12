@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
 import Form from './form';
 import { Loans } from './loans';
 
@@ -44,15 +45,18 @@ class RequestLoan extends Component {
 
         return (
             <div> 
-                <div>
-                <h1>welcome: {this.props.location.state.name}</h1>
+                <div className='tc'>
+                <h1><i>welcome:</i> {this.props.location.state.name}</h1>
                 <h2>How much do you want? </h2>
-                <p>Fill the form and see how much total you will pay back and also your monthly repayment</p>
+                <b>Fill the form and see how much total you will pay back and also your monthly repayment</b>
                 </div>
-                <Form />
-                <label>
-                    <b>Click here to view your loan repayment</b>
-                    <input type='submit' onClick={this.handleRepaymentView} />
+                <Form /> <br />
+                <label className='tc'>
+                    <h3>Click here to view your loan repayment    
+                     <Button onClick={this.handleRepaymentView}> 
+                        View
+                    </Button> 
+                    </h3>
                 </label>
             </div>
         )

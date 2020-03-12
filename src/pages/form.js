@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap'
+import '../App.css';
 
 class Form extends Component {
     constructor(props) {
         super(props)
         this.state = {
             amount: 0,
-            duration: 0,
+            years: 1,
             accountName: '',
             accountNumber: 12234333,
             bankName: '',
@@ -17,14 +19,28 @@ class Form extends Component {
     }
 
    calcMonthlyPayment() {
-       let monthlyPay = parseFloat(this.state.amount / (Math.pow(1+this.state.interest, this.state.duration)-1) / 
-       (this.state.interest * Math.pow(1+this.state.interest, this.state.duration)));
-       const loanInterest = parseFloat((this.state.interest / this.state.duration) * this.state.amount);
-       const totalPay = parseFloat(this.state.amount + loanInterest);
+    let { amount, years } = this.state;
+
+    if (1000 < amount && amount < 5000) {
+      this.setState({ interest: 0.05 });
+    }
+    if (5000 < amount && amount < 10000) {
+      this.setState({ interest: 0.1 });
+    }
+    if (10000 < amount && amount < 15000) {
+      this.setState({ interest: 0.15 });
+    }
+    if (15000 < amount && amount < 20000) {
+      this.setState({ interest: 0.2 });
+    }
+
+    let decimalFormat = this.state.interest + 1;
+    let totalOwed = decimalFormat * amount;
+    let monthlyRepay = totalOwed / (years * 12);
 
        this.setState({
-           monthlyPayment: monthlyPay,
-           totalAmount: totalPay
+           monthlyPayment: monthlyRepay,
+           totalAmount: totalOwed
        })
    }
    handleCalculations() {
@@ -33,12 +49,12 @@ class Form extends Component {
 
     render() {
         return(
-            <div>
-             <form>
+            <div class='container'>
+             <form className='tc bg-light-green dib br3 pa3 ma2 bw2 shadow-5'>
                  <label>
                      Amount
                      <input type='text' placeholder='enter amount' 
-                     validate
+                     className='pa3 ba b--green bg-lightest-blue'
                      value={this.state.amount} 
                      onChange={(e) => {
                          this.setState({ amount: e.target.value })
@@ -46,44 +62,45 @@ class Form extends Component {
                      />
                  </label> <br /><br />
                  <label>
-                     Duration(months)
+                     Duration(years)
                      <input type='text' placeholder='duration' 
-                     validate
-                     value={this.state.duration} 
+                     className='pa3 ba b--green bg-lightest-blue'
+                     value={this.state.years} 
                      onChange={(e) => {
-                         this.setState({ duration: e.target.value })
+                         this.setState({ years: e.target.value })
                      }} 
                      />
                  </label><br /><br />
                  <label>
                     Account details
                      <input type='text' placeholder='account name' 
-                     validate
+                     className='pa3 ba b--green bg-lightest-blue'
                      value={this.state.accountName} 
                      onChange={(e) => {
                          this.setState({ accountName: e.target.value })
                      }} 
                      /><br />
                      <input type='text' placeholder='account number' 
-                     validate
+                     className='pa3 ba b--green bg-lightest-blue'
                      value={this.state.accountNumber} 
                      onChange={(e) => {
                          this.setState({ accountNumber: e.target.value })
                      }} 
                      /><br />
                      <input type='text' placeholder='bank name' 
-                     validate
+                     className='pa3 ba b--green bg-lightest-blue'
                      value={this.state.bankName} 
                      onChange={(e) => {
                          this.setState({ bankName: e.target.value })
                      }} 
                      />
                  </label> <br /> <br />
-                 <input type='submit' placeholder='Submit' onClick={this.handleCalculations} />
-             </form>
+                 <Button onClick={this.handleCalculations} >Submit
+                 </Button>
+             </form> <br />
              <div>
-                   <h2>Total Amount to pay back: {this.state.totalAmount}</h2>
-                   <h2>Your monthly payment is: {this.state.monthlyPayment} </h2>
+                   <h2>Total Amount to pay back: #{Math.round(this.state.totalAmount)}</h2>
+                   <h2>Your monthly payment is: #{Math.round(this.state.monthlyPayment)} </h2>
                 </div>
             </div>
         )
