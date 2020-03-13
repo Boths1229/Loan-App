@@ -96,12 +96,13 @@ class Form extends Component {
                      />
                  </label> <br /> <br />
                  <Button onClick={this.handleCalculations} >Submit
-                 </Button>
-             </form> <br />
-             <div>
+                 </Button><br /><br />
+                 <div>
                    <h2>Total Amount to pay back: #{Math.round(this.state.totalAmount)}</h2>
                    <h2>Your monthly payment is: #{Math.round(this.state.monthlyPayment)} </h2>
                 </div>
+             </form> 
+             
             </div>
         )
     }

@@ -36,7 +36,20 @@ class RequestLoan extends Component {
 
     render() {
         if( this.state.currentLoan ) {
-          return <Redirect to={'./loanRepayment'} />
+            const loan = Loans.filter(loan => {
+                return loan.email === this.props.location.state.email;
+            })
+          return <Redirect to={{pathname: '/./loanRepayment',
+                          state: {
+                            name: loan[0].fullName,
+                            email: loan[0].email,
+                            amount: loan[0].amount,
+                            date:   loan[0].date,
+                            repayment: loan[0].repayment,
+                            balance:  loan[0].balance
+                          }
+  }} />
+       
         }
        if(this.state.noLoan) {
            alert('you currently do not have any loan outstanding! you can apply for a loan now')
@@ -46,9 +59,9 @@ class RequestLoan extends Component {
         return (
             <div> 
                 <div className='tc'>
-                <h1><i>welcome:</i> {this.props.location.state.name}</h1>
+                <h1 style={{color: 'orange'}}><i>welcome:</i> {this.props.location.state.name}</h1>
                 <h2>How much do you want? </h2>
-                <b>Fill the form and see how much total you will pay back and also your monthly repayment</b>
+                <h4>Fill the form and see how much total you will pay back and also your monthly repayment</h4>
                 </div>
                 <Form /> <br />
                 <label className='tc'>

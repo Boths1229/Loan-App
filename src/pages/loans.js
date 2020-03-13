@@ -1,16 +1,20 @@
 export const Loans = [
     {
-        fullName: 'chuks emmma',
-        amount:   2300,
-        date: '12/01/2020',
-        email: 'boths@yahoo.com',
-        repaid: true
+        fullName: 'Somkene Bryan Chukwuma',
+        amount: 5000,
+        date: '20/02/2020',
+        email: 'kene@yahoo.com',
+        repayment: 4000,
+        balance:  1000,
+        repaid: false
     },
     {
-        fullName: 'kene chuks',
-        amount: 5000,
-        data: '20/02/2020',
-        email: 'kene@yahoo.com',
+        fullName: 'Amaka Chuks',
+        amount: 10000,
+        date: '25/02/2020',
+        email: 'amaka@yahoo.com',
+        repayment: 6000,
+        balance:  4000,
         repaid: false
     }
 ]
