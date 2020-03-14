@@ -41,3 +41,32 @@ code {
 .register {
   background-color: crimson;
 }
+#title {
+  text-align: center;
+  font-family: arial, sans-serif;
+}
+
+#loans {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+}
+
+#loans td, #loans th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#loans tr:nth-child(even){background-color: #f2f2f2;}
+
+#loans tr:hover {background-color: #ddd;}
+
+#loans th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}

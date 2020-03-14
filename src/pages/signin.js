@@ -53,7 +53,7 @@ class Signin extends Component {
     const admin = Data.filter((data) => {
       return ( data.email === this.state.email && data.password === this.state.password && data.isAdmin );
     })
-    return <Redirect to={{pathname: '/verifyLoan',
+    return <Redirect to={{pathname: '/currentLoans',
                           state: {
                             name: admin[0].fullName,
                             email: admin[0].email

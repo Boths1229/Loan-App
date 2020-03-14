@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 import VerifyLoan from './pages/verifyLoan';
 import Faqs from './pages/faqs';
 import Home from './pages/home';
+import CurrentLoans from './pages/currentLoans';
 
 const Router = () => (
     <BrowserRouter basename={process.env.PUBLIC_URL} >
@@ -20,6 +21,7 @@ const Router = () => (
          <Route exact path='/requestLoan' component={RequestLoan} />
          <Route exact path='/verifyLoan' component={VerifyLoan} />
          <Route exact path='/faqs' component={Faqs} />
+         <Route exact path='/currentLoans' component={CurrentLoans} />
     </Switch>
     </BrowserRouter>
 );

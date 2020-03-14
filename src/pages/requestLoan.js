@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import Form from './form';
-import { Loans } from './loans';
+import { Loans, DetailLoans } from './loans';
 
 class RequestLoan extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class RequestLoan extends Component {
 
     render() {
         if( this.state.currentLoan ) {
-            const loan = Loans.filter(loan => {
+            const loan = DetailLoans.filter(loan => {
                 return loan.email === this.props.location.state.email;
             })
           return <Redirect to={{pathname: '/./loanRepayment',

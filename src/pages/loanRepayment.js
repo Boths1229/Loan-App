@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
+import '../index.css';
 
 class LoanRepayment extends Component { 
     render() {
         return (
             <div className='tc'>
                 <div>
-                    <h1>Hello: {this.props.location.state.name}</h1>
-                    <h3>Below is your current loan status</h3>
+                    <h1 style={{color: 'orange'}}>Hello: {this.props.location.state.name}</h1><br />
+                    <h3 id='title'>Below is your current loan status</h3>
                 </div>
-                <h2>Your loaned amount: {this.props.location.state.amount}</h2>
-                <h2>Date of disbursement: {this.props.location.state.date}</h2>
-                <h2>Total repayment so far: {this.props.location.state.repayment}</h2>
-                <h2>Balance: {this.props.location.state.balance}</h2>
+                 <table id='loans' className='f3'>
+                 <tbody>
+                     <tr>
+                        <th>Date</th>
+                        <th>Repayment</th>
+                        <th>Balance</th>
+                     </tr>
+                         <tr>
+                             <td>{this.props.location.state.date}</td>
+                             <td>{this.props.location.state.repayment}</td>
+                             <td>{this.props.location.state.balance}</td>
+                         </tr>
+                     </tbody>
+                 </table>
                 <h2>Thank you for your payments so far, we look forward to the payment completion!</h2>
             </div>
         )

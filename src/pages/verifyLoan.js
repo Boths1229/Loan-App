@@ -10,7 +10,6 @@ class VerifyLoan extends Component {
     render() {
         return(
             <div>
-                <h2>Welcome back Admin: {this.props.location.state.name}</h2>
                 <h3>Enjoy your day!</h3>
             </div>
         )

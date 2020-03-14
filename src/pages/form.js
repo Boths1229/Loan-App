@@ -100,6 +100,9 @@ class Form extends Component {
                  <div>
                    <h2>Total Amount to pay back: #{Math.round(this.state.totalAmount)}</h2>
                    <h2>Your monthly payment is: #{Math.round(this.state.monthlyPayment)} </h2>
+                </div> <br />
+                <div>
+                    <h2 style={{color: 'white'}}>Click here to apply for this loan <Button>Apply</Button> </h2>
                 </div>
              </form> 
              
