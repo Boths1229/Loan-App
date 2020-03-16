@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Loans, DetailLoans } from '../pages/loans';
-import Modal from '../component/Modal';
+import ModalLoan from '../component/Modal';
 import '../index.css';
 
 
@@ -18,7 +18,7 @@ class CurrentLoans extends Component {
             verified: 'No',
             approved: 'No'
         }
-         this.openModal = this.openModal.bind(this);
+         this.closeModal = this.closeModal.bind(this);
     }
 
     renderTableData() {
@@ -31,7 +31,13 @@ class CurrentLoans extends Component {
                <td>{email}</td>
                <td>{date}</td>
                <td>{amount}</td>
-               <td onClick={this.openModal}>{this.state.verified}</td>
+               <td onClick={() => {
+                 const singleLoan = this.state.detailLoan.filter(item => item.id === loan.id)[0];
+                 this.setState({
+                   modalLoan: singleLoan,
+                   modalOpen: true
+                 })
+               }}>{this.state.verified}</td>
                <td>{this.state.approved}</td>
             </tr>
          )
@@ -45,19 +51,6 @@ class CurrentLoans extends Component {
     })
  }
 
- getLoan(id) {
-  const loan = this.state.detailLoan.find(item => item.id === id);
-  return loan;
-}
-
-openModal(id) {
-  const loan = this.getLoan(id);
-  this.setState({
-      modalLoan:loan,
-     modalOpen:true
-  })
-}
-
 closeModal() {
   this.setState({
     modalOpen:false
@@ -65,6 +58,12 @@ closeModal() {
 }
 
     render() { 
+      console.log(this.state.modalLoan)
+      // const children = React.Children.map(this.props.children, (child) => {
+      //   return React.cloneElement(child, {
+      //     modalLoan: this.state.modalLoan
+      //   });
+      // });
         return(
                <div className='tc'>
                <h2>Hello Admin: {this.props.location.state.name}</h2><br />
@@ -73,9 +72,11 @@ closeModal() {
                <tbody>
                   <tr>{this.renderTableHeader()}</tr>
                   {this.renderTableData()}
-                {this.state.modalOpen && <Modal closeModal={this.state.modalOpen} ><h5>i am a modal</h5></Modal>}
                </tbody>
             </table>
+        <ModalLoan isOpen={this.state.modalOpen} onClose={this.closeModal} modalLoan={this.state.modalLoan} >
+        
+        </ModalLoan>
             </div>
         )
     }

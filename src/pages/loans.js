@@ -19,7 +19,7 @@ export const Loans = [
     },
     {
         id: 3,
-        fullName: 'Somi Enyokwa',
+        fullName: 'Somy Enyokwa',
         email: 'somi@yahoo.com',
         date: '15/03/2020',
         amount: 9000,
@@ -64,7 +64,7 @@ export const DetailLoans = [
     },
     {
         id: 3,
-        fullName: 'Somi Enyokwa',
+        fullName: 'Somy Enyokwa',
         email: 'somi@yahoo.com',
         date: '15/03/2020',
         amount: 9000,
