@@ -19,6 +19,7 @@ class CurrentLoans extends Component {
             approved: 'No'
         }
          this.closeModal = this.closeModal.bind(this);
+         this.verifyLoan = this.verifyLoan.bind(this);
     }
 
     renderTableData() {
@@ -57,13 +58,14 @@ closeModal() {
   })
 }
 
-    render() { 
-      console.log(this.state.modalLoan)
-      // const children = React.Children.map(this.props.children, (child) => {
-      //   return React.cloneElement(child, {
-      //     modalLoan: this.state.modalLoan
-      //   });
-      // });
+verifyLoan() {
+  this.setState({
+    verified: 'Yes',
+    approved: 'Yes'
+  })
+}
+
+    render() {
         return(
                <div className='tc'>
                <h2>Hello Admin: {this.props.location.state.name}</h2><br />
@@ -74,8 +76,9 @@ closeModal() {
                   {this.renderTableData()}
                </tbody>
             </table>
-        <ModalLoan isOpen={this.state.modalOpen} onClose={this.closeModal} modalLoan={this.state.modalLoan} >
-        
+        <ModalLoan isOpen={this.state.modalOpen} onClose={this.closeModal} 
+        modalLoan={this.state.modalLoan} verified={this.state.verified} 
+        approved={this.state.approved} verifyLoan={this.verifyLoan}>
         </ModalLoan>
             </div>
         )

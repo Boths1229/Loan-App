@@ -48,7 +48,8 @@ export const DetailLoans = [
         balance:  1000,
         homeAddress: 'road 17 diamond estate',
         officeAddress: 'ikeja',
-        repaid: false
+        verified: 'No',
+        approved: 'No'
     },
     {
         id: 2,
@@ -60,7 +61,8 @@ export const DetailLoans = [
         balance:  4000,
         homeAddress: 'wakefiled west yorkshire',
         officeAddress: 'middlesbrough',
-        repaid: false
+        verified: 'No',
+        approved: 'No'
     },
     {
         id: 3,
@@ -72,7 +74,8 @@ export const DetailLoans = [
         balance:  5000,
         homeAddress: 'wakefiled west yorkshire',
         officeAddress: 'middlesbrough',
-        repaid: false
+        verified: 'No',
+        approved: 'No'
     },
     {
         id: 4,
@@ -84,6 +87,7 @@ export const DetailLoans = [
         balance:  14000,
         homeAddress: 'wakefiled west yorkshire',
         officeAddress: 'middlesbrough',
-        repaid: false
+        verified: 'No',
+        approved: 'No'
     }
 ]
