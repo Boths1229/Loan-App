@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Loans, DetailLoans } from '../pages/loans';
 import ModalLoan from '../component/Modal';
 import '../index.css';
 
@@ -9,10 +8,9 @@ class CurrentLoans extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loans: Loans,
-            detailLoan: DetailLoans,
+            loans: [],
             modalOpen: false,
-            modalLoan: DetailLoans,
+            modalLoan: [],
             isVerified: false,
             isApproved: false,
             verified: 'No',
@@ -22,18 +20,27 @@ class CurrentLoans extends Component {
          this.verifyLoan = this.verifyLoan.bind(this);
     }
 
+    componentDidMount() {
+      fetch('https://wayfarerr.herokuapp.com/api/v1/loans')
+      .then(res => res.json())
+      .then((user) => {
+        this.setState({ loans: user.data })
+      })
+      .catch(console.log)
+    }
+
     renderTableData() {
       return this.state.loans.map((loan, index) => {
-         const { id, fullName, email, date, amount} = loan //destructuring
+         const { id, fullname, email, date, amount} = loan //destructuring
          return (
             <tr key={id}>
                <td>{id}</td>
-               <td>{fullName}</td>
+               <td>{fullname}</td>
                <td>{email}</td>
                <td>{date}</td>
                <td>{amount}</td>
                <td onClick={() => {
-                 const singleLoan = this.state.detailLoan.filter(item => item.id === loan.id)[0];
+                 const singleLoan = this.state.loans.filter(item => item.id === loan.id)[0];
                  this.setState({
                    modalLoan: singleLoan,
                    modalOpen: true
@@ -44,13 +51,6 @@ class CurrentLoans extends Component {
          )
       })
    }
-
-   renderTableHeader() {
-    let header = Object.keys(this.state.loans[0])
-    return header.map((key, index) => {
-       return <th key={index}>{key.toUpperCase()}</th>
-    })
- }
 
 closeModal() {
   this.setState({
@@ -66,13 +66,22 @@ verifyLoan() {
 }
 
     render() {
+      console.log(this.state.loans)
         return(
                <div className='tc'>
                <h2>Hello Admin: {this.props.location.state.name}</h2><br />
                <h1 id='title'>Applied Loans</h1>
                <table id='loans' className='f3'>
                <tbody>
-                  <tr>{this.renderTableHeader()}</tr>
+                 <tr>
+                   <th>ID</th>
+                   <th>FULLNAME</th>
+                   <th>EMAIL</th>
+                   <th>DATE</th>
+                   <th>AMOUNT</th>
+                   <th>VERIFIED</th>
+                   <th>APPROVED</th>
+                 </tr>
                   {this.renderTableData()}
                </tbody>
             </table>

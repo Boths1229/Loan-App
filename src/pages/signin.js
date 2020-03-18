@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 import 'bootstrap';
 import { Redirect } from 'react-router-dom';
-import { Data } from '../pages/data'
+// import { Data } from '../pages/data'
 import '../index.css';
 
 class Signin extends Component {
@@ -11,20 +11,28 @@ class Signin extends Component {
       this.state = {
         email:     '',
         password:  '',
-        Data:      Data,
+        Users:      [],
         registered:   false,
         notRegisterd: false,
         isAdmin:      false
       }
       this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    fetch('https://wayfarerr.herokuapp.com/api/v1/users')
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ Users: data })
+    })
+    .catch(console.log)
+  }
   checkRegister() {
-    const isRegistered = Data.filter((data) => {
-      return (data.email === this.state.email && data.password === this.state.password
+    const isRegistered = this.state.Users.data.filter((data) => {
+      return (data.email === this.state.email && data.first_name === this.state.password
        );
     })
-    const admin = Data.filter((data) => {
-      return ( data.email === this.state.email && data.password === this.state.password && data.isAdmin );
+    const admin = this.state.Users.data.filter((data) => {
+      return ( data.email === this.state.email && data.first_name === this.state.password && data.is_admin );
     })
 
     if (admin[0]) {
@@ -49,26 +57,28 @@ class Signin extends Component {
 
 
   render () { 
+    
+    console.log(this.state.Users.data)
   if (this.state.isAdmin) {
-    const admin = Data.filter((data) => {
-      return ( data.email === this.state.email && data.password === this.state.password && data.isAdmin );
+    const admin = this.state.Users.data.filter((data) => {
+      return ( data.email === this.state.email && data.first_name === this.state.password && data.is_admin );
     })
     return <Redirect to={{pathname: '/currentLoans',
                           state: {
-                            name: admin[0].fullName,
+                            name: admin[0].first_name,
                             email: admin[0].email
                           }
   }} />
   }
 
   if (this.state.registered) {
-    const isRegistered = Data.filter((data) => {
-      return (data.email === this.state.email && data.password === this.state.password
+    const isRegistered = this.state.Users.data.filter((data) => {
+      return (data.email === this.state.email && data.first_name === this.state.password
        );
     })
     return <Redirect to={{pathname: '/requestLoan',
                           state: {
-                            name: isRegistered[0].fullName,
+                            name: isRegistered[0].first_name,
                             email: isRegistered[0].email
                           }
   }} />

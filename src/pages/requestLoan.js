@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import Form from './form';
-import { Loans, DetailLoans } from './loans';
 
 class RequestLoan extends Component {
     constructor(props) {
@@ -10,13 +9,22 @@ class RequestLoan extends Component {
         this.state = {
            currentLoan: false,
            noLoan: false,
-           Loans: Loans
+           Loans: []
         }
         this.handleRepaymentView = this.handleRepaymentView.bind(this);
     }
+    componentDidMount() {
+        fetch('https://wayfarerr.herokuapp.com/api/v1/loans')
+        .then(res => res.json())
+        .then((user) => {
+          this.setState({ Loans: user.data })
+        })
+        .catch(console.log)
+      }
+  
     
    viewRepayment() {
-       const loan = Loans.map(loan => {
+       const loan = this.state.Loans.map(loan => {
            return loan.email;
        })
        if (loan.includes(this.props.location.state.email)) {
@@ -36,17 +44,15 @@ class RequestLoan extends Component {
 
     render() {
         if( this.state.currentLoan ) {
-            const loan = DetailLoans.filter(loan => {
+            const loan = this.state.Loans.filter(loan => {
                 return loan.email === this.props.location.state.email;
             })
           return <Redirect to={{pathname: '/./loanRepayment',
                           state: {
-                            name: loan[0].fullName,
+                            name: loan[0].fullname,
                             email: loan[0].email,
                             amount: loan[0].amount,
-                            date:   loan[0].date,
-                            repayment: loan[0].repayment,
-                            balance:  loan[0].balance
+                            date:   loan[0].date
                           }
   }} />
        

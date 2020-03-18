@@ -49,7 +49,7 @@ class Form extends Component {
 
     render() {
         return(
-            <div class='container'>
+            <div className='container'>
              <form className='tc bg-light-green dib br3 pa3 ma2 bw2 shadow-5'>
                  <label>
                      Amount

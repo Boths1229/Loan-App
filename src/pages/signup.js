@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { Redirect } from 'react-router-dom';
 import 'bootstrap';
-import { Data } from '../pages/data';
+// import { Data } from '../pages/data';
 
 class Signup extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class Signup extends Component {
         this.state = {
             email: '',
             confirmEmail: '',
-            Data: Data,
+            Users: [],
             registered: false,
             notRegistered: false,
             emailConfirmed: true
@@ -18,8 +18,17 @@ class Signup extends Component {
       this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+componentDidMount() {
+    fetch('https://wayfarerr.herokuapp.com/api/v1/users')
+    .then(res => res.json())
+    .then((data) => {
+        this.setState({ Users: data })
+    })
+    .catch(console.log)
+    }
+
 checkEmail () {
-    const register = Data.map(data => {
+    const register = this.state.Users.data.map(data => {
         return (data.email)
     })
 
