@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { Redirect } from 'react-router-dom';
 import 'bootstrap';
+import '../index.css';
 // import { Data } from '../pages/data';
 
 class Signup extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            firstname: '',
+            lastname: '',
             email: '',
             confirmEmail: '',
+            password: '',
             Users: [],
             registered: false,
             notRegistered: false,
@@ -67,52 +70,74 @@ handleSubmit() {
        }
 
         return (
-            <div>
-                <MDBContainer>
-                <MDBRow>
-                    <MDBCol md="6" className='mt-5'>
-                    <form>
-                        <p className="h2 text-center mb-3">Sign up</p>
-                        <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
-                        Your name
-                        </label>
-                        <input type="text" id="defaultFormRegisterNameEx" className="form-control" />
-                        <br />
-                        <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
-                        Your email
-                        </label>
-                        <input type="email" id="defaultFormRegisterEmailEx" className="form-control" 
-                        value={this.state.email}
-                        onChange={(e) => {
-                            this.setState({
-                                email: e.target.value
-                            })
-                        }}/>
-                        <br />
-                        <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
-                        Confirm your email
-                        </label>
-                        <input type="email" id="defaultFormRegisterConfirmEx" className="form-control" 
-                        value={this.state.confirmEmail}
-                        onChange={(e) => {
-                            this.setState({
-                                confirmEmail: e.target.value
-                            })
-                        }} />
-                        <br />
-                        <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                        Your password
-                        </label>
-                        <input type="password" id="defaultFormRegisterPasswordEx" className="form-control" />
-                        <div className="text-center mt-4" onClick={this.handleSubmit} >
-                        <MDBBtn type="submit" className='register'>
-                                Register
-                        </MDBBtn>
-                        </div>
-                    </form>
-                    </MDBCol>
-                </MDBRow>
-                </MDBContainer>
+            <div className='tc'>
+                <form className='tc bg-light-green dib br3 pa3 ma5 bw2 shadow-5'>
+                <h3>Sign Up</h3>
+
+                <div className="form-group">
+                    <label>First name</label>
+                    <input type="text" className="form-control" placeholder="First name"
+                    value={this.state.firstname}
+                    onChange={(e) => {
+                      this.setState({
+                        firstname: e.target.value
+                      })
+                    }}
+                     />
+                </div>
+
+                <div className="form-group">
+                    <label>Last name</label>
+                    <input type="text" className="form-control" placeholder="Last name"
+                    value={this.state.lastname}
+                    onChange={(e) => {
+                      this.setState({
+                        lastname: e.target.value
+                      })
+                    }}
+                     />
+                </div>
+
+                <div className="form-group">
+                    <label>Email address</label>
+                    <input type="email" className="form-control" placeholder="Enter email"
+                    value={this.state.email}
+                    onChange={(e) => {
+                      this.setState({
+                        email: e.target.value
+                      })
+                    }}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Confirm Email</label>
+                    <input type="email" className="form-control" placeholder="Enter password" 
+                    value={this.state.confirmEmail}
+                    onChange={(e) => {
+                      this.setState({
+                        confirmEmail: e.target.value
+                      })
+                    }}
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" 
+                    value={this.state.password}
+                    onChange={(e) => {
+                      this.setState({
+                        password: e.target.value
+                      })
+                    }}
+                    />
+                </div>
+
+                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                <p className="forgot-password text-right">
+                    Already registered <a href="/signin">sign in?</a>
+                </p>
+            </form>
             </div>
         )
     }

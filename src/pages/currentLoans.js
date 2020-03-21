@@ -31,7 +31,7 @@ class CurrentLoans extends Component {
 
     renderTableData() {
       return this.state.loans.map((loan, index) => {
-         const { id, fullname, email, date, amount} = loan //destructuring
+         const { id, fullname, email, date, amount, verified, approved} = loan //destructuring
          return (
             <tr key={id}>
                <td>{id}</td>
@@ -45,8 +45,8 @@ class CurrentLoans extends Component {
                    modalLoan: singleLoan,
                    modalOpen: true
                  })
-               }}>{this.state.verified}</td>
-               <td>{this.state.approved}</td>
+               }}>{verified}</td>
+               <td>{approved}</td>
             </tr>
          )
       })
@@ -59,14 +59,24 @@ closeModal() {
 }
 
 verifyLoan() {
-  this.setState({
+  this.setState({ 
     verified: 'Yes',
     approved: 'Yes'
   })
+
+//   let id = this.state.loans.map(loan => loan.id)
+//   console.log(id)
+//   const verify = this.state.loans.filter(loan => loan === id);
+//   if (verify) {
+//     console.log(verify)
+//   this.setState({ 
+//     verified: 'Yes',
+//     approved: 'Yes'
+//   })
+// }
 }
 
     render() {
-      console.log(this.state.loans)
         return(
                <div className='tc'>
                <h2>Hello Admin: {this.props.location.state.name}</h2><br />
@@ -86,8 +96,7 @@ verifyLoan() {
                </tbody>
             </table>
         <ModalLoan isOpen={this.state.modalOpen} onClose={this.closeModal} 
-        modalLoan={this.state.modalLoan} verified={this.state.verified} 
-        approved={this.state.approved} verifyLoan={this.verifyLoan}>
+        modalLoan={this.state.modalLoan} verifyLoan={this.verifyLoan}>
         </ModalLoan>
             </div>
         )

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 import 'bootstrap';
 import { Redirect } from 'react-router-dom';
-// import { Data } from '../pages/data'
 import '../index.css';
 
 class Signin extends Component {
@@ -89,68 +87,50 @@ class Signin extends Component {
       return 
   }
   return (
-    <MDBContainer>
-      <MDBRow>
-        <MDBCol md="6" className='mt-5'>
-          <MDBCard>
-            <div className="header pt-3 grey lighten-2">
-              <MDBRow className="d-flex justify-content-start">
-                <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
-                  Log in
-                </h3>
-              </MDBRow>
-            </div>
-            <MDBCardBody className="mx-4 mt-4">
-              <MDBInput label="Your email" group type="text" validate 
-              value={this.state.email} 
-              onChange={(e)=> {
-                  this.setState({email: e.target.value})
-              }} />
-              <MDBInput
-                label="Your password"
-                group
-                type="password"
-                validate
-                containerClass="mb-0"
-                value={this.state.password}
-                onChange={(e)=> {
-                    this.setState({password:e.target.value})
-                }}
-              />
-              <p className="font-small grey-text d-flex justify-content-end">
-                Forgot
-                <a
-                  href="#!"
-                  className="dark-grey-text font-weight-bold ml-1"
-                >
-                  Password?
-                </a>
-              </p>
-              <div className="text-center mb-4 mt-5" onClick={this.handleSubmit}>
-                <MDBBtn
-                  color="danger"
-                  type="button"
-                  className="btn-block z-depth-2"
-                >
-                  Log in
-                </MDBBtn>
-              </div>
-              <p className="font-small grey-text d-flex justify-content-center">
-                Don't have an account?
-                <a
-                  href="/signup"
-                  className="dark-grey-text font-weight-bold ml-1"
-                >
-                  Sign up
-                </a>
-              </p>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+    <div className='tc'>
+    <form className='tc bg-light-green dib br3 pa3 ma5 bw2 shadow-5'>
+                <h3>Sign In</h3>
+
+                <div className="form-group">
+                    <label>Email address</label>
+                    <input type="email" className="form-control" placeholder="Enter email" 
+                    value={this.state.email}
+                    onChange={(e) => {
+                      this.setState({
+                        email: e.target.value
+                      })
+                    }}
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password"
+                    value={this.state.password}
+                    onChange={(e) => {
+                      this.setState({
+                        password: e.target.value
+                      })
+                    }}
+                     />
+                </div>
+
+                <div className="form-group">
+                    <div className="custom-control custom-checkbox">
+                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
+                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
+                    </div>
+                </div>
+
+                <button type="submit" className="btn btn-primary btn-block" onClick={this.handleSubmit} >Submit</button>
+                <p className="forgot-password text-right">
+                    Forgot <a href="#">password?</a>
+                </p>
+            </form>
+       </div>   
   );
   }
 };
 
 export default Signin;
+

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
-import '../App.css';
+import '.././App.css';
+import ModalApplyLoan from '../component/ModalLoan';
 
 class Form extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            fullname: '',
+            email: '',
+            date: '',
+            homeaddress: '',
+            officeaddress: '',
             amount: 0,
             years: 1,
             accountName: '',
@@ -13,9 +19,13 @@ class Form extends Component {
             bankName: '',
             interest: 0.075,
             monthlyPayment: 0,
-            totalAmount: 0
+            totalAmount: 0,
+            modalOpen: false,
+            // modalLoan: []
         }
         this.handleCalculations = this.handleCalculations.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.openModal = this.openModal.bind(this);
     }
 
    calcMonthlyPayment() {
@@ -47,6 +57,18 @@ class Form extends Component {
        return this.calcMonthlyPayment();
    }
 
+   closeModal() {
+    this.setState({
+      modalOpen:false
+    })
+  }
+
+  openModal() {
+    this.setState({
+      modalOpen:true
+    })
+  }
+
     render() {
         return(
             <div className='container'>
@@ -71,30 +93,6 @@ class Form extends Component {
                      }} 
                      />
                  </label><br /><br />
-                 <label>
-                    Account details
-                     <input type='text' placeholder='account name' 
-                     className='pa3 ba b--green bg-lightest-blue'
-                     value={this.state.accountName} 
-                     onChange={(e) => {
-                         this.setState({ accountName: e.target.value })
-                     }} 
-                     /><br />
-                     <input type='text' placeholder='account number' 
-                     className='pa3 ba b--green bg-lightest-blue'
-                     value={this.state.accountNumber} 
-                     onChange={(e) => {
-                         this.setState({ accountNumber: e.target.value })
-                     }} 
-                     /><br />
-                     <input type='text' placeholder='bank name' 
-                     className='pa3 ba b--green bg-lightest-blue'
-                     value={this.state.bankName} 
-                     onChange={(e) => {
-                         this.setState({ bankName: e.target.value })
-                     }} 
-                     />
-                 </label> <br /> <br />
                  <Button onClick={this.handleCalculations} >Submit
                  </Button><br /><br />
                  <div>
@@ -102,7 +100,15 @@ class Form extends Component {
                    <h2>Your monthly payment is: #{Math.round(this.state.monthlyPayment)} </h2>
                 </div> <br />
                 <div>
-                    <h2 style={{color: 'white'}}>Click here to apply for this loan <Button>Apply</Button> </h2>
+                    <h2 style={{color: 'white'}}>Click here to apply for this loan 
+                     <Button onClick={this.openModal}>Apply</Button> </h2>
+                    <ModalApplyLoan amount={this.state.amount} totalAmount={this.state.totalAmount}
+                        onClose={this.closeModal} isOpen={this.state.modalOpen}
+                        accountName={this.state.accountName} accountNumber={this.state.accountNumber}
+                        bankName={this.state.bankName} fullname={this.state.fullname} email={this.state.email}
+                        date={this.state.date} homeaddress={this.state.homeaddress} officeaddress={this.state.officeaddress} >
+                        
+                     </ModalApplyLoan>
                 </div>
              </form> 
              
