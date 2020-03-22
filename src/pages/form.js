@@ -74,7 +74,7 @@ class Form extends Component {
             <div className='container'>
              <form className='tc bg-light-green dib br3 pa3 ma2 bw2 shadow-5'>
                  <label>
-                     Amount
+                     Amount(#)
                      <input type='text' placeholder='enter amount' 
                      className='pa3 ba b--green bg-lightest-blue'
                      value={this.state.amount} 
@@ -96,8 +96,22 @@ class Form extends Component {
                  <Button onClick={this.handleCalculations} >Submit
                  </Button><br /><br />
                  <div>
-                   <h2>Total Amount to pay back: #{Math.round(this.state.totalAmount)}</h2>
-                   <h2>Your monthly payment is: #{Math.round(this.state.monthlyPayment)} </h2>
+                 <label>
+                     Total Amount To Pay Back(#)
+                     <input type='text' placeholder='duration' 
+                     className='pa3 ba b--green bg-lightest-blue'
+                     value={Math.round(this.state.totalAmount)} 
+                     />
+                 </label><br /><br />
+                 <label>
+                     Monthly Payment(#)
+                     <input type='text' placeholder='duration' 
+                     className='pa3 ba b--green bg-lightest-blue'
+                     value={Math.round(this.state.monthlyPayment)} 
+                     />
+                 </label><br /><br />
+                   {/* <h2>Total Amount to pay back: #{Math.round(this.state.totalAmount)}</h2>
+                   <h2>Your monthly payment is: #{Math.round(this.state.monthlyPayment)} </h2> */}
                 </div> <br />
                 <div>
                     <h2 style={{color: 'white'}}>Click here to apply for this loan 

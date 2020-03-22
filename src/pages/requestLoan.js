@@ -66,17 +66,20 @@ class RequestLoan extends Component {
             <div> 
                 <div className='tc'>
                 <h1 style={{color: 'orange'}}><i>welcome:</i> {this.props.location.state.name}</h1>
-                <h2>How much do you want? </h2>
-                <h4>Fill the form and see how much total you will pay back and also your monthly repayment</h4>
+                <h2>You Need A Loan? Fill the form Friend</h2>
+                <h2>You Have An Ongoing Lone? Click here to view your loan repayment    
+                     <Button onClick={this.handleRepaymentView}> 
+                        View
+                    </Button>  </h2>
                 </div>
                 <Form /> <br />
-                <label className='tc'>
+                {/* <label className='tc'>
                     <h3>Click here to view your loan repayment    
                      <Button onClick={this.handleRepaymentView}> 
                         View
                     </Button> 
                     </h3>
-                </label>
+                </label> */}
             </div>
         )
     }

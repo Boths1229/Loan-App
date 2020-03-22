@@ -12,9 +12,9 @@ class LoanRepayment extends Component {
                  <table id='loans' className='f3'>
                  <tbody>
                      <tr>
-                        <th>Fullname</th>
-                        <th>date</th>
-                        <th>amount</th>
+                        <th>FULLNAME</th>
+                        <th>DATE</th>
+                        <th>AMOUNT</th>
                      </tr>
                          <tr>
                              <td>{this.props.location.state.name}</td>
